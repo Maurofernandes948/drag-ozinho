@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { FireIcon, LockClosedIcon, SparklesIcon } from "@heroicons/react/24/solid";
 import { DRAGON_BG, DRAGON_MASCOT } from "../lib/assets";
 
 export default function RegisterScreen({
@@ -119,8 +120,11 @@ export default function RegisterScreen({
                 border: "1px solid rgba(179,107,255,0.4)",
               }}
             />
-            <p className="text-[9px] mt-1.5" style={{ color: "#666" }}>
-              🔒 Usado apenas para confirmar os teus ganhos
+            <p
+              className="text-[9px] mt-1.5 flex items-center gap-1"
+              style={{ color: "#666" }}
+            >
+              <LockClosedIcon className="w-3 h-3" /> Usado apenas para confirmar os teus ganhos
             </p>
           </div>
         </div>
@@ -138,7 +142,7 @@ export default function RegisterScreen({
           }}
           whileTap={valid ? { scale: 0.97 } : {}}
         >
-          🐉 Receber as minhas rodadas
+          <span className="inline-flex items-center justify-center gap-2"><FireIcon className="w-5 h-5" />Receber as minhas rodadas</span>
         </motion.button>
 
         <p className="text-[9px] text-center mt-3" style={{ color: "#555" }}>
@@ -168,11 +172,11 @@ export default function RegisterScreen({
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
             >
               <motion.div
-                className="text-5xl mb-3"
+                className="mb-3 flex justify-center"
                 animate={{ scale: [1, 1.2, 1], rotate: [0, 10, -10, 0] }}
                 transition={{ duration: 0.6 }}
               >
-                🐉
+                <FireIcon className="w-14 h-14" style={{ color: "#FF8A00" }} />
               </motion.div>
               <h3
                 className="text-lg font-bold mb-2"
@@ -199,7 +203,11 @@ export default function RegisterScreen({
                 animate={{ scale: [1, 1.05, 1] }}
                 transition={{ duration: 1.5, repeat: Infinity }}
               >
-                🎰 10 RODADAS GRÁTIS
+                <SparklesIcon
+                  className="inline-block w-6 h-6 mr-1 align-[-3px]"
+                  style={{ color: "#FFC94D" }}
+                />
+                10 RODADAS GRÁTIS
               </motion.p>
               <motion.button
                 onClick={() => onComplete(name.trim())}
@@ -213,7 +221,7 @@ export default function RegisterScreen({
                 }}
                 whileTap={{ scale: 0.97 }}
               >
-                🔥 Entrar no Templo
+                <span className="inline-flex items-center justify-center gap-2"><FireIcon className="w-5 h-5" />Entrar no Templo</span>
               </motion.button>
             </motion.div>
           </motion.div>

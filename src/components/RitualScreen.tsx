@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { CurrencyDollarIcon, FireIcon, ShieldCheckIcon } from "@heroicons/react/24/solid";
 import { DRAGON_BG, DRAGON_MASCOT } from "../lib/assets";
 
 export type Amulet = {
   id: string;
-  emoji: string;
+  Icon: typeof FireIcon;
+  color: string;
   name: string;
   blessing: string;
 };
@@ -12,19 +14,22 @@ export type Amulet = {
 export const AMULETS: Amulet[] = [
   {
     id: "fogo",
-    emoji: "🔥",
+    Icon: FireIcon,
+    color: "#FF8A00",
     name: "Chama do Dragão",
     blessing: "Ganhos de fogo — multiplicador sobe mais depressa",
   },
   {
     id: "jade",
-    emoji: "🟢",
+    Icon: ShieldCheckIcon,
+    color: "#22C55E",
     name: "Jade Antigo",
     blessing: "Protecção — a sua sequência resiste às derrotas",
   },
   {
     id: "moeda",
-    emoji: "🪙",
+    Icon: CurrencyDollarIcon,
+    color: "#FFD34D",
     name: "Moeda Imperial",
     blessing: "Riqueza — rodadas surpresa pagam mais",
   },
@@ -141,7 +146,7 @@ export default function RitualScreen({
                 }}
               >
                 <motion.span
-                  className="text-2xl"
+                  className="flex shrink-0"
                   animate={{ scale: [1, 1.15, 1] }}
                   transition={{
                     duration: 1.8,
@@ -149,7 +154,7 @@ export default function RitualScreen({
                     delay: Math.random(),
                   }}
                 >
-                  {amulet.emoji}
+                  <amulet.Icon className="w-7 h-7" style={{ color: amulet.color }} />
                 </motion.span>
                 <div>
                   <div className="text-sm font-bold text-white">
@@ -175,11 +180,11 @@ export default function RitualScreen({
             style={{ background: "rgba(8,0,18,0.92)" }}
           >
             <motion.div
-              className="text-7xl"
+              className="flex"
               animate={{ scale: [0.6, 1.4, 1], rotate: [0, 15, -15, 0] }}
               transition={{ duration: 1.4 }}
             >
-              {selected.emoji}
+              <selected.Icon className="w-20 h-20" style={{ color: selected.color }} />
             </motion.div>
             <motion.p
               className="mt-5 text-lg font-bold text-center px-8"

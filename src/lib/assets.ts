@@ -1,5 +1,6 @@
 export const DRAGON_BG = "/assets/dragon-bg-DeqV7tV2.jpg";
 export const DRAGON_MASCOT = "/assets/dragon-mascot-9CwToCC7.webp";
+export const MULTICAIXA_EXPRESS = "/multicaixaexpress.png";
 
 export const SYMBOLS = [
   { id: "wild", image: "/assets/d-wild-j6hBVUNO.webp", name: "Wild Dragon" },
@@ -31,6 +32,6 @@ export const SYMBOLS = [
 
 export const COIN_IMAGE = "/assets/coin-B-_21BXn.webp";
 
-export const WELCOME_VIDEO_ID = "6ab029c1624e3cacd6a27c8e";
-export const ACTIVATION_VIDEO_ID = "6aaefc6b4b55dc601a46920d";
-export const CONVERTEAI_ACCOUNT = "77f7f12d-5e90-456d-b45e-7c7f2aa34ed0";
+export const WELCOME_VIDEO_ID = "6ab45e55cfdfc9a87a36bc2b";
+export const ACTIVATION_VIDEO_ID = "6ab4612bac874a7093a795ee";
+export const CONVERTEAI_ACCOUNT = "87f2363b-25cb-4c3f-835b-2b85dcbf57e6";

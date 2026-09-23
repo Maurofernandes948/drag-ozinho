@@ -5,6 +5,7 @@ import {
   Routes,
   useLocation,
 } from "react-router-dom";
+import { SpeakerWaveIcon, SpeakerXMarkIcon } from "@heroicons/react/24/solid";
 import WelcomeScreen from "./components/WelcomeScreen";
 import type { Amulet } from "./components/RitualScreen";
 import { useMusic } from "./hooks/useMusic";
@@ -41,7 +42,11 @@ function FortuneDragonApp() {
           boxShadow: "0 0 14px rgba(255,47,208,0.35)",
         }}
       >
-        {muted ? "🔇" : "🔊"}
+        {muted ? (
+          <SpeakerXMarkIcon className="w-5 h-5 text-white" />
+        ) : (
+          <SpeakerWaveIcon className="w-5 h-5 text-white" />
+        )}
       </button>
     ) : null;
 

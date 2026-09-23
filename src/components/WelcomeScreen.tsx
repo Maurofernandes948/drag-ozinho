@@ -1,11 +1,17 @@
 import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import { DRAGON_BG, DRAGON_MASCOT, CONVERTEAI_ACCOUNT, WELCOME_VIDEO_ID } from "../lib/assets";
+import { CheckCircleIcon, FireIcon } from "@heroicons/react/24/solid";
+import {
+  DRAGON_BG,
+  DRAGON_MASCOT,
+  CONVERTEAI_ACCOUNT,
+  WELCOME_VIDEO_ID,
+} from "../lib/assets";
 
-function buildPlayerCode(videoId: string) {
+function buildPlayerCode(account: string, videoId: string) {
   return `
       var s=document.createElement("script");
-      s.src="https://scripts.converteai.net/${CONVERTEAI_ACCOUNT}/players/${videoId}/v4/player.js",
+      s.src="https://scripts.converteai.net/${account}/players/${videoId}/v4/player.js",
       s.async=!0,document.head.appendChild(s);
     `;
 }
@@ -24,10 +30,15 @@ export default function WelcomeScreen({
     player.id = `vid-${WELCOME_VIDEO_ID}`;
     player.style.cssText =
       "display:block;margin:0 auto;width:100%;max-width:400px;";
+    const placeholder = document.createElement("div");
+    placeholder.className = "vturb-player-placeholder";
+    placeholder.style.cssText =
+      "position:relative;width:100%;padding:178.21782178217822% 0 0;z-index:0;background-color:black;";
+    player.appendChild(placeholder);
     container.appendChild(player);
     const script = document.createElement("script");
     script.type = "text/javascript";
-    script.textContent = buildPlayerCode(WELCOME_VIDEO_ID);
+    script.textContent = buildPlayerCode(CONVERTEAI_ACCOUNT, WELCOME_VIDEO_ID);
     container.appendChild(script);
     return () => {
       while (container.firstChild) container.removeChild(container.firstChild);
@@ -130,8 +141,13 @@ export default function WelcomeScreen({
               125.000 Kz
             </span>
           </p>
-          <p className="text-[11px] mt-1" style={{ color: "#7CFFB2" }}>
-            ✅ Sem depósito • ✅ Sem cartão • ✅ Só jogar
+          <p
+            className="text-[11px] mt-1 flex items-center justify-center gap-1 flex-wrap"
+            style={{ color: "#7CFFB2" }}
+          >
+            <CheckCircleIcon className="w-3.5 h-3.5" /> Sem depósito •{" "}
+            <CheckCircleIcon className="w-3.5 h-3.5" /> Sem cartão •{" "}
+            <CheckCircleIcon className="w-3.5 h-3.5" /> Só jogar
           </p>
         </motion.div>
 
@@ -161,7 +177,7 @@ export default function WelcomeScreen({
           transition={{ delay: 0.35 }}
           whileTap={{ scale: 0.97 }}
         >
-          🐉 QUERO AS MINHAS 10 RODADAS
+          <span className="inline-flex items-center justify-center gap-2"><FireIcon className="w-5 h-5" />QUERO AS MINHAS 10 RODADAS</span>
         </motion.button>
 
         <motion.p
