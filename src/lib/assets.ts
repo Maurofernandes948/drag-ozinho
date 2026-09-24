@@ -33,5 +33,5 @@ export const SYMBOLS = [
 export const COIN_IMAGE = "/assets/coin-B-_21BXn.webp";
 
 export const WELCOME_VIDEO_ID = "6ab45e55cfdfc9a87a36bc2b";
-export const ACTIVATION_VIDEO_ID = "6ab4612bac874a7093a795ee";
+export const ACTIVATION_VIDEO_ID = "6ab474956633547dc1841d42";
 export const CONVERTEAI_ACCOUNT = "87f2363b-25cb-4c3f-835b-2b85dcbf57e6";

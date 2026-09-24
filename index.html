@@ -4,6 +4,34 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Fortune Dragon — Giros Grátis e Ganhos em Kz | Angola</title>
+
+    <script>
+      !function (f, b, e, v, n, t, s) {
+        if (f.fbq) return;
+        n = f.fbq = function () {
+          n.callMethod
+            ? n.callMethod.apply(n, arguments)
+            : n.queue.push(arguments);
+        };
+        if (!f._fbq) f._fbq = n;
+        n.push = n;
+        n.loaded = !0;
+        n.version = "2.0";
+        n.queue = [];
+        t = b.createElement(e);
+        t.async = !0;
+        t.src = v;
+        s = b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t, s);
+      }(
+        window,
+        document,
+        "script",
+        "https://connect.facebook.net/en_US/fbevents.js",
+      );
+      fbq("init", "1491647463002903");
+      fbq("track", "PageView");
+    </script>
     <meta
       name="description"
       content="Joga Fortune Dragon: 10 giros grátis, multiplicadores até 2500x e levantamento rápido por IBAN ou Multicaixa Express."
@@ -20,7 +48,7 @@
     />
     <link
       rel="preload"
-      href="https://scripts.converteai.net/87f2363b-25cb-4c3f-835b-2b85dcbf57e6/players/6ab4612bac874a7093a795ee/v4/player.js"
+      href="https://scripts.converteai.net/87f2363b-25cb-4c3f-835b-2b85dcbf57e6/players/6ab474956633547dc1841d42/v4/player.js"
       as="script"
     />
     <link
@@ -36,7 +64,7 @@
     />
     <link
       rel="preload"
-      href="https://cdn.converteai.net/87f2363b-25cb-4c3f-835b-2b85dcbf57e6/6ab460b08548e06abb533d71/main.m3u8"
+      href="https://cdn.converteai.net/87f2363b-25cb-4c3f-835b-2b85dcbf57e6/6ab474168548e06abb535e07/main.m3u8"
       as="fetch"
       crossorigin
     />
@@ -65,6 +93,14 @@
   </head>
 
   <body>
+    <noscript>
+      <img
+        height="1"
+        width="1"
+        style="display: none"
+        src="https://www.facebook.com/tr?id=1491647463002903&ev=PageView&noscript=1"
+      />
+    </noscript>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
