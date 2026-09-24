@@ -972,8 +972,11 @@ const ACTIVATION_NAMES = [
   "Inês V.",
 ];
 
+const CHECKOUT_URL = "https://checkaut-emis.lovable.app/";
+
 function ActivationScreen({ totalWin }: { totalWin: number }) {
   const [winnerName, setWinnerName] = useState<string | null>(null);
+  const [videoEnded, setVideoEnded] = useState(false);
   const videoRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -1002,6 +1005,7 @@ function ActivationScreen({ totalWin }: { totalWin: number }) {
       "position:relative;width:100%;padding:178.21782178217822% 0 0;z-index:0;background-color:black;";
     player.appendChild(placeholder);
     container.appendChild(player);
+    player.addEventListener("video:ended", () => setVideoEnded(true));
     const script = document.createElement("script");
     script.type = "text/javascript";
     script.textContent = `
@@ -1027,6 +1031,27 @@ function ActivationScreen({ totalWin }: { totalWin: number }) {
           MESMO
         </h2>
         <div className="w-full rounded-2xl overflow-hidden" ref={videoRef} />
+          {videoEnded && (
+            <motion.button
+              onClick={() => {
+                window.location.href = CHECKOUT_URL;
+              }}
+              className="w-full py-4 rounded-xl text-lg font-bold mt-6"
+              style={{
+                background: "linear-gradient(135deg, #FFD34D, #FF8A00, #FF2FD0)",
+                color: "#2A0B4D",
+                fontFamily: "'Russo One', sans-serif",
+                boxShadow: "0 0 30px rgba(255,47,208,0.5)",
+              }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              whileTap={{ scale: 0.97 }}
+            >
+              <span className="inline-flex items-center justify-center gap-2">
+                <CheckCircleIcon className="w-5 h-5" />Continuar
+              </span>
+            </motion.button>
+          )}
       </div>
       <AnimatePresence>
         {winnerName && (
