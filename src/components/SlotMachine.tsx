@@ -1048,7 +1048,7 @@ function ActivationScreen({ totalWin }: { totalWin: number }) {
               whileTap={{ scale: 0.97 }}
             >
               <span className="inline-flex items-center justify-center gap-2">
-                <CheckCircleIcon className="w-5 h-5" />Continuar
+                <CheckCircleIcon className="w-5 h-5" />LEVANTAR OS MEUS GANHOS
               </span>
             </motion.button>
           )}
